@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Мой Видео-Сайт</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js"></script>
+</head>
+<body>
+
+
+<div class="header">
+<input type="text" id="search" placeholder="Поиск видео..." oninput="filterVideos()">
+<button id="updateBtn" title="Обновить плейлист">🔄 Update</button>
+</div>
+
+
+<div class="container">
+
+
+<div class="playlist" id="playlist">
+<?php
+$files = glob("videos/*.mp4");
+foreach($files as $file){
+$name = basename($file);
+echo "<div class='video-item' onclick='playVideo(\"$file\")'>$name</div>";
+}
+?>
+</div>
+
+
+<div class="player">
+<video id="player" controls>
+<source src="videos/video1.mp4" type="video/mp4">
+</video>
+</div>
+
+
+</div>
+
+
+<div id="history">
+<h3>История просмотров</h3>
+</div>
+
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+<input type="file" name="video" accept="video/mp4">
+<button type="submit">Загрузить видео</button>
+</form>
+
+
+</body>
+</html>
